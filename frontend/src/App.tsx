@@ -34,7 +34,7 @@ function App() {
       ></Search>
       {/* show server error if axios api call fails (conditional rendering) */}
       {serverError && <h1>{serverError}</h1>}
-      <CardList></CardList>
+      <CardList searchResults={searchResult}></CardList>
     </div>
   );
 }
