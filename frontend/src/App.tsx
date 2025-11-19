@@ -25,6 +25,11 @@ function App() {
     console.log(searchResult);
   };
 
+  const onPortfolioCreate = (e: SyntheticEvent) => {
+    e.preventDefault();
+    console.log(e);
+  };
+
   return (
     <div className="App">
       <Search
@@ -34,7 +39,10 @@ function App() {
       ></Search>
       {/* show server error if axios api call fails (conditional rendering) */}
       {serverError && <h1>{serverError}</h1>}
-      <CardList searchResults={searchResult}></CardList>
+      <CardList
+        searchResults={searchResult}
+        onPortfolioCreate={onPortfolioCreate}
+      ></CardList>
     </div>
   );
 }
