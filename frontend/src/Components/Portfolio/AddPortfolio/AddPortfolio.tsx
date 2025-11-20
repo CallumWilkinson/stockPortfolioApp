@@ -5,7 +5,7 @@ interface Props {
   symbol: string;
 }
 
-const AddPortflio = ({ onPortfolioCreate, symbol }: Props) => {
+const AddPortfolio = ({ onPortfolioCreate, symbol }: Props) => {
   return (
     <div>
       <form onSubmit={onPortfolioCreate}>
@@ -16,4 +16,4 @@ const AddPortflio = ({ onPortfolioCreate, symbol }: Props) => {
   );
 };
 
-export default AddPortflio;
+export default AddPortfolio;

@@ -41,6 +41,10 @@ function App() {
 
   const onPortfolioDelete = (e: any) => {
     e.preventDefault();
+    const removed = portfolioValues.filter((value) => {
+      return value !== e.target[0].value;
+    });
+    setPortfolioValues(removed);
   };
 
   return (
@@ -50,7 +54,10 @@ function App() {
         search={search}
         handleSearchChange={handleSearchChange}
       ></Search>
-      <ListPortfolio portfolioValues={portfolioValues}></ListPortfolio>
+      <ListPortfolio
+        portfolioValues={portfolioValues}
+        onPortfolioDelete={onPortfolioDelete}
+      ></ListPortfolio>
       {/* show server error if axios api call fails (conditional rendering) */}
       {serverError && <h1>{serverError}</h1>}
       <CardList
