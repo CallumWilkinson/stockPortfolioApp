@@ -52,7 +52,6 @@ const SearchPage = (props: Props) => {
 
   return (
     <div className="App">
-      <NavBar></NavBar>
       <Hero></Hero>
       <Search
         onSearchSubmit={onSearchSubmit}
