@@ -26,7 +26,7 @@ const CardList: React.FC<Props> = ({
           );
         })
       ) : (
-        <p className="mb-3 mt-3 text-xl font-semibold text-center md:text-xl">
+        <p className="mb-3 mt-3 text-xl font-semibold text-brand-forest/80 text-center md:text-xl">
           No results!
         </p>
       )}

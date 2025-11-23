@@ -10,12 +10,17 @@ module.exports = {
     },
     extend: {
       colors: {
-        lightBlue: "hsl(215.02, 98.39%, 51.18%)",
-        darkBlue: "hsl(213.86, 58.82%, 46.67%)",
-        lightGreen: "hsl(156.62, 73.33%, 58.82%)",
+        brand: {
+          leaf: "#2ABA58",
+          mint: "#66C879",
+          forest: "#2B4532",
+          sand: "#FFFDF9",
+          mist: "#F2F5F0",
+        },
       },
       fontFamily: {
-        sans: ["Poppins", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
+        display: ["Space Grotesk", "sans-serif"],
       },
       spacing: {
         180: "32rem",
