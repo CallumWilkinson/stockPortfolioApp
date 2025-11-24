@@ -35,7 +35,7 @@ const Table = (props: Props) => {
   const renderedHeaders = configs.map((config: any) => {
     return (
       <th
-        className="p-4 text-left text-xs font-medium text-fray-500 uppercase"
+        className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
         key={config.label}
       >
         {config.label}

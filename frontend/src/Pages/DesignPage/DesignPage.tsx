@@ -1,3 +1,4 @@
+import RatioList from "../../Components/RatioList/RatioList";
 import Table from "../../Components/Table/Table";
 interface Props {}
 
@@ -9,6 +10,7 @@ const DesignPage = (props: Props) => {
         Below are some of the Components for the CleanTicker app for
         development, desgin and testing purposes
       </h2>
+      <RatioList></RatioList>
       <Table></Table>
     </>
   );
