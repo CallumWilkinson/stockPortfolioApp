@@ -24,8 +24,12 @@ const Hero = (props: Props) => {
             </Link>
           </div>
         </div>
-        <div className="mb-24 mx-auto md:w-180 md:px-10 lg:mb-0 lg:w-1/2">
-          <img src={hero} alt="" />
+        <div className="mb-24 mx-auto lg:mb-0 lg:w-1/2 flex items-center justify-center">
+          <img
+            src={hero}
+            alt=""
+            className="block max-w-full h-auto object-contain"
+          />
         </div>
       </div>
     </section>
