@@ -1,3 +1,5 @@
+import Spinner from "../Spinner/Spinner";
+
 interface Props {
   config: any;
   data: any;
@@ -5,7 +7,7 @@ interface Props {
 
 const RatioList = ({ config, data }: Props) => {
   if (!data) {
-    return <div>Loading data...</div>;
+    return <Spinner></Spinner>;
   }
   const renderedRows = config.map((row: any) => {
     return (
