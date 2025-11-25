@@ -4,6 +4,7 @@ import {
   CompanyProfile,
   CompanySearch,
   CompanyIncomeStatement,
+  CompanyBalanceSheet,
 } from "./company";
 
 interface SearchResponse {
@@ -52,8 +53,18 @@ export const getKeyMetrics = async (query: string) => {
 export const getIncomeStatement = async (query: string) => {
   try {
     const data = await axios.get<CompanyIncomeStatement[]>(
-      //add limit??
       `https://financialmodelingprep.com/stable/income-statement?symbol=${query}&apikey=${process.env.REACT_APP_API_KEY}`
+    );
+    return data;
+  } catch (error: any) {
+    console.log("error from API on getIncomeStatement: ", error.message);
+  }
+};
+
+export const getBalanceSheet = async (query: string) => {
+  try {
+    const data = await axios.get<CompanyBalanceSheet[]>(
+      `https://financialmodelingprep.com/stable/balance-sheet-statement?symbol=${query}&apikey=${process.env.REACT_APP_API_KEY}`
     );
     return data;
   } catch (error: any) {

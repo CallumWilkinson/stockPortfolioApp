@@ -7,9 +7,6 @@ const RatioList = ({ config, data }: Props) => {
   if (!data) {
     return <div>Loading data...</div>;
   }
-  if (!config) {
-    return <div>Loading ratios...</div>;
-  }
   const renderedRows = config.map((row: any) => {
     return (
       <li className="py-3 sm:py-4">

@@ -160,56 +160,76 @@ export interface CompanyBalanceSheet {
   symbol: string;
   reportedCurrency: string;
   cik: string;
-  fillingDate: string;
-  acceptedDate: string;
-  calendarYear: string;
+  filingDate: string;
+  acceptedDate: string; // "2024-11-01 06:01:36"
+  fiscalYear: string;
   period: string;
+
   cashAndCashEquivalents: number;
   shortTermInvestments: number;
   cashAndShortTermInvestments: number;
+
   netReceivables: number;
+  accountsReceivables: number;
+  otherReceivables: number;
+
   inventory: number;
+  prepaids: number;
   otherCurrentAssets: number;
   totalCurrentAssets: number;
+
   propertyPlantEquipmentNet: number;
   goodwill: number;
   intangibleAssets: number;
   goodwillAndIntangibleAssets: number;
+
   longTermInvestments: number;
   taxAssets: number;
   otherNonCurrentAssets: number;
   totalNonCurrentAssets: number;
+
   otherAssets: number;
   totalAssets: number;
+
+  totalPayables: number;
   accountPayables: number;
+  otherPayables: number;
+  accruedExpenses: number;
+
   shortTermDebt: number;
+  capitalLeaseObligationsCurrent: number;
   taxPayables: number;
   deferredRevenue: number;
   otherCurrentLiabilities: number;
   totalCurrentLiabilities: number;
+
   longTermDebt: number;
   deferredRevenueNonCurrent: number;
   deferredTaxLiabilitiesNonCurrent: number;
   otherNonCurrentLiabilities: number;
   totalNonCurrentLiabilities: number;
+
   otherLiabilities: number;
   capitalLeaseObligations: number;
   totalLiabilities: number;
+
+  treasuryStock: number;
   preferredStock: number;
   commonStock: number;
   retainedEarnings: number;
+  additionalPaidInCapital: number;
   accumulatedOtherComprehensiveIncomeLoss: number;
-  othertotalStockholdersEquity: number;
+  otherTotalStockholdersEquity: number;
+
   totalStockholdersEquity: number;
   totalEquity: number;
-  totalLiabilitiesAndStockholdersEquity: number;
   minorityInterest: number;
+
   totalLiabilitiesAndTotalEquity: number;
+
   totalInvestments: number;
   totalDebt: number;
   netDebt: number;
-  link: string;
-  finalLink: string;
 }
 
 export interface CompanyCashFlow {
