@@ -5,6 +5,7 @@ import {
   CompanySearch,
   CompanyIncomeStatement,
   CompanyBalanceSheet,
+  CompanyCashFlow,
 } from "./company";
 
 interface SearchResponse {
@@ -68,6 +69,17 @@ export const getBalanceSheet = async (query: string) => {
     );
     return data;
   } catch (error: any) {
-    console.log("error from API on getIncomeStatement: ", error.message);
+    console.log("error from API on getBalanceSheet: ", error.message);
+  }
+};
+
+export const getCashFlowStatement = async (query: string) => {
+  try {
+    const data = await axios.get<CompanyCashFlow[]>(
+      `https://financialmodelingprep.com/stable/cash-flow-statement?symbol=${query}&apikey=${process.env.REACT_APP_API_KEY}`
+    );
+    return data;
+  } catch (error: any) {
+    console.log("error from API on getCashFlowStatement: ", error.message);
   }
 };
