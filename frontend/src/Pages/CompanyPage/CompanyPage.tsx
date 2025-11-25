@@ -44,6 +44,9 @@ const CompanyPage = (props: Props) => {
               title="Market Cap"
               subTitle={company.mktCap.toString()}
             ></Tile>
+            <p className="bg-white shadow rounded text-medium text-gray-900 p-3 mt-1 m-4">
+              {company.description}
+            </p>
           </CompanyDashboard>
         </div>
       ) : (
