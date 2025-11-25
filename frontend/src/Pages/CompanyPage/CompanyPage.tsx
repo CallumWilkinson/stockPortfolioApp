@@ -31,6 +31,9 @@ const CompanyPage = (props: Props) => {
     getProfileInit();
   }, [ticker]);
 
+  if (!company) {
+    return <>Loading...</>;
+  }
   return (
     <>
       {company ? (
@@ -42,7 +45,7 @@ const CompanyPage = (props: Props) => {
             <Tile title="Sector" subTitle={company.sector}></Tile>
             <Tile
               title="Market Cap"
-              subTitle={company.mktCap.toString()}
+              subTitle={company.marketCap.toString()}
             ></Tile>
             <p className="bg-white shadow rounded text-medium text-gray-900 p-3 mt-1 m-4">
               {company.description}

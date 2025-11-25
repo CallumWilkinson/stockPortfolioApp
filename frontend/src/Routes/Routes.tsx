@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
             element: <CompanyBalanceSheet></CompanyBalanceSheet>,
           },
           {
-            path: "cash-flow-satement",
+            path: "cash-flow-statement",
             element: <CashFlowStatement></CashFlowStatement>,
           },
         ],

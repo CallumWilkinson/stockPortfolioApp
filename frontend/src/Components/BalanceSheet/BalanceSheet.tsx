@@ -33,7 +33,7 @@ export const config = [
   },
   {
     label: "Total Debt",
-    render: (company: CompanyBalanceSheet) => company.totalDebt, // FIXED
+    render: (company: CompanyBalanceSheet) => company.totalDebt,
   },
   {
     label: <div className="font-bold">Total Liabilities</div>,
@@ -80,9 +80,11 @@ const BalanceSheet = (props: Props) => {
   }, [ticker]);
   return (
     <>
-      {balanceSheet} ? (
-      <RatioList config={config} data={balanceSheet}></RatioList>):(
-      <>Loading...</>)
+      {balanceSheet ? (
+        <RatioList config={config} data={balanceSheet}></RatioList>
+      ) : (
+        <>Loading...</>
+      )}
     </>
   );
 };

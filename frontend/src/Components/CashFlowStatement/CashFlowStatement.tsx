@@ -50,7 +50,7 @@ const CashFlowStatement = (props: Props) => {
     const fetchCashFlowData = async () => {
       try {
         const result = await getCashFlowStatement(ticker!);
-        setCashFlowData(result?.data);
+        setCashFlowData(result!.data);
       } catch (error: any) {
         console.log(error.message);
       }
@@ -59,8 +59,11 @@ const CashFlowStatement = (props: Props) => {
   }, [ticker]);
   return (
     <>
-      {cashFlowData} ? (<Table config={config} data={cashFlowData}></Table>) : (
-      <>Loading...</>)
+      {cashFlowData ? (
+        <Table config={config} data={cashFlowData}></Table>
+      ) : (
+        <>Loading...</>
+      )}
     </>
   );
 };
