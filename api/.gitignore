@@ -1,0 +1,57 @@
+## Build results
+bin/
+obj/
+out/
+
+## Visual Studio cache and settings
+.vs/
+*.user
+*.suo
+
+## Logs
+*.log
+
+## NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+## ASP.NET Core generated files
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+
+# Do NOT ignore main appsettings.json unless you intentionally want that.
+#!appsettings.json
+
+## IIS / Hosting
+*.dbmdl
+*.jfm
+Generated\ Files/
+
+## Dotnet tools
+.classpath
+.project
+.settings/
+
+## Node (only if you use front-end bundling)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+## Resharper / Rider
+_ReSharper*/
+*.DotSettings.user
+.idea/
+
+## JetBrains Rider
+.idea/
+
+## OS generated files
+.DS_Store
+Thumbs.db
+
+## Publish output
+/dist/
+.publish/
