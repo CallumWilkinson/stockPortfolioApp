@@ -43,9 +43,9 @@ const CompanyPage = (props: Props) => {
           <Sidebar></Sidebar>
           <CompanyDashboard ticker={ticker!}>
             <Tile title="Company Name" subTitle={company.companyName} />
-            <Tile title="Price" subTitle={company.price.toString()} />
+            <Tile title="Price" subTitle={"$" + company.price.toString()} />
             <Tile title="Sector" subTitle={company.sector} />
-            <Tile title="Market Cap" subTitle={company.marketCap.toString()} />
+            <Tile title="Beta" subTitle={company.beta.toString()} />
 
             <div className="w-full px-4 mt-8">
               <section className="w-full bg-white border border-blueGray-100 rounded-2xl shadow-xl p-6">

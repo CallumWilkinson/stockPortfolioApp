@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import { getIncomeStatement } from "../../api";
 import Table from "../Table/Table";
 import Spinner from "../Spinner/Spinner";
+import {
+  formatLargeNonMonetaryNumber,
+  formatRatio,
+  formatLargeMonetaryNumber,
+} from "../../Helpers/NumberFormatting";
 
 interface Props {}
 
@@ -14,36 +19,42 @@ const configs = [
   },
   {
     label: "Revenue",
-    render: (company: CompanyIncomeStatement) => company.revenue,
+    render: (company: CompanyIncomeStatement) =>
+      formatLargeMonetaryNumber(company.revenue),
   },
   {
     label: "Cost Of Revenue",
-    render: (company: CompanyIncomeStatement) => company.costOfRevenue,
+    render: (company: CompanyIncomeStatement) =>
+      formatLargeMonetaryNumber(company.costOfRevenue),
   },
   {
     label: "Depreciation & Amortization",
     render: (company: CompanyIncomeStatement) =>
-      company.depreciationAndAmortization,
+      formatLargeMonetaryNumber(company.depreciationAndAmortization),
   },
   {
     label: "Operating Income",
-    render: (company: CompanyIncomeStatement) => company.operatingIncome,
+    render: (company: CompanyIncomeStatement) =>
+      formatLargeMonetaryNumber(company.operatingIncome),
   },
   {
     label: "Income Before Taxes",
-    render: (company: CompanyIncomeStatement) => company.incomeBeforeTax,
+    render: (company: CompanyIncomeStatement) =>
+      formatLargeMonetaryNumber(company.incomeBeforeTax),
   },
   {
     label: "Net Income",
-    render: (company: CompanyIncomeStatement) => company.netIncome,
+    render: (company: CompanyIncomeStatement) =>
+      formatLargeMonetaryNumber(company.netIncome),
   },
   {
     label: "Earnings Per Share",
-    render: (company: CompanyIncomeStatement) => company.eps,
+    render: (company: CompanyIncomeStatement) => formatRatio(company.eps),
   },
   {
     label: "Earnings Per Share (Diluted)",
-    render: (company: CompanyIncomeStatement) => company.epsDiluted,
+    render: (company: CompanyIncomeStatement) =>
+      formatRatio(company.epsDiluted),
   },
 ];
 
