@@ -6,6 +6,7 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import CompanyDashboard from "../../Components/CompanyDashboard/CompanyDashboard";
 import Tile from "../../Components/Tile/Tile";
 import Spinner from "../../Components/Spinner/Spinner";
+import ComparableFinder from "../../Components/ComparableFinder/ComparableFinder";
 
 interface Props {}
 
@@ -38,19 +39,36 @@ const CompanyPage = (props: Props) => {
   return (
     <>
       {company ? (
-        <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">
+        <div className="w-full px-4 mt-6">
           <Sidebar></Sidebar>
           <CompanyDashboard ticker={ticker!}>
-            <Tile title="Company Name" subTitle={company.companyName}></Tile>
-            <Tile title="Price" subTitle={company.price.toString()}></Tile>
-            <Tile title="Sector" subTitle={company.sector}></Tile>
-            <Tile
-              title="Market Cap"
-              subTitle={company.marketCap.toString()}
-            ></Tile>
-            <p className="bg-white shadow rounded text-medium text-gray-900 p-3 mt-1 m-4">
-              {company.description}
-            </p>
+            <Tile title="Company Name" subTitle={company.companyName} />
+            <Tile title="Price" subTitle={company.price.toString()} />
+            <Tile title="Sector" subTitle={company.sector} />
+            <Tile title="Market Cap" subTitle={company.marketCap.toString()} />
+
+            <div className="w-full px-4 mt-8">
+              <section className="w-full bg-white border border-blueGray-100 rounded-2xl shadow-xl p-6">
+                <div className="flex flex-col gap-4">
+                  <h2 className="text-2xl font-semibold text-blueGray-900">
+                    Comparable Companies
+                  </h2>
+
+                  <div className="w-full">
+                    <ComparableFinder
+                      ticker={company.symbol}
+                      className="w-full"
+                    />
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <div className="w-full px-4 mt-6">
+              <article className="bg-white shadow rounded text-medium text-gray-900 p-3 mt-1">
+                {company.description}
+              </article>
+            </div>
           </CompanyDashboard>
         </div>
       ) : (

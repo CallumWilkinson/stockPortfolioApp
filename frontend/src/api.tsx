@@ -6,6 +6,7 @@ import {
   CompanyIncomeStatement,
   CompanyBalanceSheet,
   CompanyCashFlow,
+  CompanyCompData,
 } from "./company";
 
 interface SearchResponse {
@@ -20,7 +21,7 @@ export const searchCompanies = async (query: string) => {
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log("error message: ", error.message);
+      console.log("error from API on getCompanyProfile: ", error.message);
       return error.message;
     } else {
       console.log("unexpected error: ", error);
@@ -81,5 +82,17 @@ export const getCashFlowStatement = async (query: string) => {
     return data;
   } catch (error: any) {
     console.log("error from API on getCashFlowStatement: ", error.message);
+  }
+};
+
+export const getComparableStocks = async (query: string) => {
+  try {
+    //returns array
+    const data = await axios.get<CompanyCompData[]>(
+      `https://financialmodelingprep.com/stable/stock-peers?symbol=${query}&apikey=${process.env.REACT_APP_API_KEY}`
+    );
+    return data;
+  } catch (error: any) {
+    console.log("error from API on getComparableStocks: ", error.message);
   }
 };

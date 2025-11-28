@@ -365,7 +365,9 @@ export interface Dividend {
 
 export interface CompanyCompData {
   symbol: string;
-  peersList: string[];
+  companyName: string;
+  price: number;
+  mktCap: number;
 }
 
 export interface CompanyTenK {
