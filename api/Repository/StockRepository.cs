@@ -59,6 +59,11 @@ namespace api.Repository
                 stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
             }
 
+            if (!string.IsNullOrWhiteSpace(query.Industry))
+            {
+                stocks = stocks.Where(s => s.Industry.Contains(query.Industry));
+            }
+
             return await stocks.ToListAsync();
         }
 
