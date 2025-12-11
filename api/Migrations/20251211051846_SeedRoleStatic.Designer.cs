@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Data;
 
@@ -11,9 +12,11 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20251211051846_SeedRoleStatic")]
+    partial class SeedRoleStatic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,15 +54,15 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "role-admin",
-                            ConcurrencyStamp = "static-admin-stamp",
+                            Id = "Admin",
+                            ConcurrencyStamp = "26169b2b-77a2-4882-b167-9cc19e444420",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "role-user",
-                            ConcurrencyStamp = "static-user-stamp",
+                            Id = "User",
+                            ConcurrencyStamp = "16b0f95e-42d2-44b8-bad4-fd7812927ff3",
                             Name = "User",
                             NormalizedName = "USER"
                         });

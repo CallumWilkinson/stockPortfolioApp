@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,5 +17,30 @@ namespace api.Data
         }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Comment> Comments { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            List<IdentityRole> roles = new List<IdentityRole>
+            {
+                new IdentityRole
+                {
+                    Id = "role-admin",
+                    Name = "Admin",
+                    NormalizedName = "ADMIN",
+                    ConcurrencyStamp = "static-admin-stamp"
+                },
+
+                new IdentityRole
+                {
+                    Id = "role-user",
+                    Name = "User",
+                    NormalizedName = "USER",
+                    ConcurrencyStamp = "static-user-stamp"
+                }
+            };
+            builder.Entity<IdentityRole>().HasData(roles);
+        }
     }
 }
