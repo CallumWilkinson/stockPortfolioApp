@@ -47,14 +47,12 @@ The agent should **respect the tutorial’s structure and patterns**, even if th
      - “Show me how you would structure this instead”
      - “Give me improved version of this method”
 
-3. **Never commit or run Git operations**
+3. **Never commit changes for me, only ever give me commit messages as text**
 
    - Never:
      - Stage files
      - Commit changes
-     - Push, pull, or run any Git commands
-   - At most, when explicitly asked, you may suggest **commit messages** as plain text.  
-     You must not imply that you are running Git yourself.
+     - Push changes
 
 4. **Explain before you edit**
 
