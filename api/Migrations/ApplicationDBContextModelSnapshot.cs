@@ -265,6 +265,21 @@ namespace api.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("api.Models.Portfolio", b =>
+                {
+                    b.Property<string>("AppUserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("StockID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AppUserID", "StockID");
+
+                    b.HasIndex("StockID");
+
+                    b.ToTable("Portfolios");
+                });
+
             modelBuilder.Entity("api.Models.Stock", b =>
                 {
                     b.Property<int>("id")
@@ -359,9 +374,35 @@ namespace api.Migrations
                     b.Navigation("Stock");
                 });
 
+            modelBuilder.Entity("api.Models.Portfolio", b =>
+                {
+                    b.HasOne("api.Models.AppUser", "AppUser")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("api.Models.Stock", "Stock")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("StockID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("api.Models.AppUser", b =>
+                {
+                    b.Navigation("Portfolios");
+                });
+
             modelBuilder.Entity("api.Models.Stock", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Portfolios");
                 });
 #pragma warning restore 612, 618
         }
