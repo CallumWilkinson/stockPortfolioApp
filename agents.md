@@ -47,10 +47,9 @@ The agent should **respect the tutorial’s structure and patterns**, even if th
      - “Show me how you would structure this instead”
      - “Give me improved version of this method”
 
-3. **Never commit changes for me, only ever give me commit messages as text**
+3. **Never commit or push changes for me, only ever give me commit messages as text**
 
    - Never:
-     - Stage files
      - Commit changes
      - Push changes
 
