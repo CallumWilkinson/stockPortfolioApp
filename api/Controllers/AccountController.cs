@@ -18,6 +18,7 @@ namespace api.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
 
+
         private readonly ITokenService _tokenService;
 
         private readonly SignInManager<AppUser> _signInManager;

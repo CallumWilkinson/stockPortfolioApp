@@ -23,5 +23,10 @@ namespace api.Models
         //navigation
         public Stock? Stock { get; set; }
 
+        //on to many relationship
+        public string AppUserId { get; set; }
+
+        public AppUser AppUser { get; set; }
+
     }
 }
