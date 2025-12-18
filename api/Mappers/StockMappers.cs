@@ -37,6 +37,20 @@ namespace api.Mappers
 
             };
         }
+
+        public static Stock toStockFromFMPStockDto(this FMPStockDto fmpStockDto)
+        {
+            return new Stock
+            {
+                Symbol = fmpStockDto.symbol,
+                CompanyName = fmpStockDto.companyName,
+                Purchase = (decimal)fmpStockDto.price,
+                LastDiv = (decimal)fmpStockDto.lastDividend,
+                Industry = fmpStockDto.industry,
+                MarketCap = fmpStockDto.marketCap,
+
+            };
+        }
     }
 
 }
