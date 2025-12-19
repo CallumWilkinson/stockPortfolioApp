@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Extensions;
 using api.Interfaces;
 using api.Models;
+using api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +22,15 @@ namespace api.Controllers
         private readonly IStockRepository _stockRepo;
 
         private readonly IPortfolioRepository _portfolioRepo;
+
+        private readonly IFMPService _fMPService;
         public PortfolioController(UserManager<AppUser> userManager,
-        IStockRepository stockRepo, IPortfolioRepository portfolioRepo)
+        IStockRepository stockRepo, IPortfolioRepository portfolioRepo, IFMPService fMPService)
         {
             _userManager = userManager;
             _stockRepo = stockRepo;
             _portfolioRepo = portfolioRepo;
+            _fMPService = fMPService;
         }
 
         [HttpGet]
@@ -50,7 +54,15 @@ namespace api.Controllers
 
             if (stock == null)
             {
-                return BadRequest("Stock not found");
+                stock = await _fMPService.FindStockBySymbolAsync(symbol);
+                if (stock == null)
+                {
+                    return BadRequest("Stock does not exist");
+                }
+                else
+                {
+                    await _stockRepo.CreateAsync(stock);
+                }
             }
 
             var userPortflio = await _portfolioRepo.getUserPortfolio(appUser);
