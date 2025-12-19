@@ -9,6 +9,7 @@ using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
 using api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,8 +36,8 @@ namespace api.Controllers
         }
 
         [HttpGet]
-
-        public async Task<IActionResult> GetAll(CommentQueryObject queryObject)
+        [Authorize]
+        public async Task<IActionResult> GetAll([FromQuery] CommentQueryObject queryObject)
         {
 
             if (!ModelState.IsValid)
