@@ -52,6 +52,15 @@ The agent should **respect the tutorial’s structure and patterns**, even if th
    - Never:
      - Commit changes
      - Push changes
+   - When you suggest a commit message for this project, always include:
+     - A short 1–2 sentence explanation of **why the change is important** (impact/value)
+     - Bullets that focus on **what it enables** or **what problem it solves** (not just implementation steps)
+     - Any notable behaviour changes (e.g., auth persistence, default headers, routing impact)
+   - Preferred format:
+     - `feat(scope): short summary`
+     - Blank line
+     - Why paragraph
+     - 3–6 bullets (what changed + why it matters)
 
 4. **Explain before you edit**
 
