@@ -22,15 +22,18 @@ const NavBar = (props: Props) => {
           </div>
         </div>
         <div className="hidden lg:flex items-center space-x-6 font-sans">
-          <div className="font-medium transition-colors hover:text-brand-leaf">
+          <Link
+            to="/login"
+            className="font-medium transition-colors hover:text-brand-leaf"
+          >
             Login
-          </div>
-          <a
-            href=""
+          </Link>
+          <Link
+            to="/register"
             className="px-8 py-3 font-semibold rounded-lg text-brand-sand bg-brand-leaf transition-colors hover:bg-brand-mint"
           >
             Signup
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
