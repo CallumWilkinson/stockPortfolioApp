@@ -9,6 +9,7 @@ import DesignPage from "../Pages/DesignPage/DesignPage";
 import CompanyBalanceSheet from "../Components/BalanceSheet/BalanceSheet";
 import CashFlowStatement from "../Components/CashFlowStatement/CashFlowStatement";
 import LoginPage from "../Pages/LoginPage/LoginPage";
+import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "", element: <HomePage></HomePage> },
       { path: "login", element: <LoginPage></LoginPage> },
+      { path: "register", element: <RegisterPage></RegisterPage> },
       { path: "search", element: <SearchPage></SearchPage> },
       { path: "design-guide", element: <DesignPage></DesignPage> },
       {
