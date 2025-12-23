@@ -23,7 +23,7 @@ export const registerAPI = async (
 ) => {
   try {
     const data = await axios.post<UserProfileToken>(api + "account/register", {
-      email: email,
+      EmailAddress: email,
       username: username,
       password: password,
     });
