@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StockCommentForm from "./StockCommentForm/StockCommentForm";
-import { commentPostAPI } from "../../Services/CommentService";
+import { commentGetAPI, commentPostAPI } from "../../Services/CommentService";
 import { toast } from "react-toastify";
+import { CommentGet } from "../../Models/Comment";
+import StockCommentList from "../StockCommentList/StockCommentList";
+import Spinner from "../Spinner/Spinner";
 
 type Props = {
   stockSymbol: string;
@@ -13,11 +16,19 @@ type CommentFormInputs = {
 };
 
 const StockComment = ({ stockSymbol }: Props) => {
+  const [comments, setComments] = useState<CommentGet[] | null>(null);
+  const [loading, setLoading] = useState<boolean>();
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
   const handleComment = (e: CommentFormInputs): void => {
     commentPostAPI(e.title, e.content, stockSymbol)
       .then((res) => {
         if (res) {
           toast.success("Comment created successfully!");
+          getComments();
         }
       })
       .catch((e) => {
@@ -25,11 +36,26 @@ const StockComment = ({ stockSymbol }: Props) => {
       });
   };
 
+  const getComments = () => {
+    setLoading(true);
+    commentGetAPI(stockSymbol).then((res) => {
+      setLoading(false);
+      setComments(res?.data!);
+    });
+  };
+
   return (
-    <StockCommentForm
-      symbol={stockSymbol}
-      handleComment={handleComment}
-    ></StockCommentForm>
+    <div className="flex flex-col">
+      {loading ? (
+        <Spinner></Spinner>
+      ) : (
+        <StockCommentList comments={comments!}></StockCommentList>
+      )}
+      <StockCommentForm
+        symbol={stockSymbol}
+        handleComment={handleComment}
+      ></StockCommentForm>
+    </div>
   );
 };
 
