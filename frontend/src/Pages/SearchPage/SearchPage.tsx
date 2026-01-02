@@ -17,9 +17,7 @@ interface Props {}
 
 const SearchPage = (props: Props) => {
   const [search, setSearch] = useState<string>("");
-  const [portfolioValues, setPortfolioValues] = useState<PortfolioGet[] | null>(
-    []
-  );
+  const [portfolioValues, setPortfolioValues] = useState<PortfolioGet[]>([]);
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
   const [serverError, setServerError] = useState<string>("");
 
@@ -40,33 +38,38 @@ const SearchPage = (props: Props) => {
     } else if (Array.isArray(result.data)) {
       setSearchResult(result.data);
     }
+
     console.log(searchResult);
   };
 
-  const getPortfolio = () => {
-    portfolioGetAPI()
-      .then((res) => {
-        if (res?.data) {
-          setPortfolioValues(res?.data);
-        }
-      })
-      .catch((e) => {
-        toast.warning("Could not get portfolio values!");
-      });
+  const getPortfolio = async () => {
+    try {
+      const res = await portfolioGetAPI();
+
+      if (!res?.data) {
+        return;
+      }
+
+      setPortfolioValues(res.data);
+    } catch (error) {
+      toast.warning("Could not get portfolio values!");
+    }
   };
 
-  const onPortfolioCreate = (e: any) => {
-    e.preventDefault();
-    portfolioAddAPI(e.target[0].value)
-      .then((res) => {
-        if (res?.status === 204) {
-          toast.success("Stock added to portfolio");
-          getPortfolio();
-        }
-      })
-      .catch((e) => {
+  const onPortfolioCreate = async (symbol: string) => {
+    try {
+      const res = await portfolioAddAPI(symbol);
+
+      if (res?.status !== 204) {
         toast.warning("Could not add stock to portfolio");
-      });
+        return;
+      }
+
+      toast.success("Stock added to portfolio");
+      await getPortfolio();
+    } catch (error) {
+      toast.warning("Could not add stock to portfolio");
+    }
   };
 
   const onPortfolioDelete = (e: any) => {
@@ -88,7 +91,7 @@ const SearchPage = (props: Props) => {
         handleSearchChange={handleSearchChange}
       ></Search>
       <ListPortfolio
-        portfolioValues={portfolioValues!}
+        portfolioValues={portfolioValues}
         onPortfolioDelete={onPortfolioDelete}
       ></ListPortfolio>
       {/* show server error if axios api call fails (conditional rendering) */}
