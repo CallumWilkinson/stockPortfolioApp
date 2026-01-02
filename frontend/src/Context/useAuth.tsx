@@ -5,6 +5,7 @@ import { loginAPI, registerAPI } from "../Services/AuthService";
 import { toast } from "react-toastify";
 import React from "react";
 import axios from "axios";
+import { setAuthToken } from "../Services/ApiClientService";
 
 type UserContextType = {
   user: UserProfile | null;
@@ -33,11 +34,13 @@ export const UserProvider = ({ children }: Props) => {
     if (user && token) {
       setUser(JSON.parse(user));
       setToken(token);
-      //add token to every axios request
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
     }
     setIsReady(true);
   }, []);
+
+  useEffect(() => {
+    setAuthToken(token);
+  }, [token]);
 
   const registerUser = async (
     email: string,
@@ -47,13 +50,15 @@ export const UserProvider = ({ children }: Props) => {
     await registerAPI(email, username, password)
       .then((res) => {
         if (res) {
-          localStorage.setItem("token", res?.data.token);
+          const jwt = res?.data.token;
+          localStorage.setItem("token", jwt);
           const userObj = {
             userName: res?.data.userName,
             email: res?.data.email,
           };
           localStorage.setItem("user", JSON.stringify(userObj));
-          setToken(res?.data.token);
+          setAuthToken(jwt);
+          setToken(jwt);
           setUser(userObj);
           toast.success("Login Successful!");
           navigate("/search");
@@ -66,13 +71,15 @@ export const UserProvider = ({ children }: Props) => {
     await loginAPI(username, password)
       .then((res) => {
         if (res) {
-          localStorage.setItem("token", res?.data.token);
+          const jwt = res?.data.token;
+          localStorage.setItem("token", jwt);
           const userObj = {
             userName: res?.data.userName,
             email: res?.data.email,
           };
           localStorage.setItem("user", JSON.stringify(userObj));
-          setToken(res?.data.token);
+          setAuthToken(jwt);
+          setToken(jwt);
           setUser(userObj);
           toast.success("Login Successful!");
           navigate("/search");
@@ -82,14 +89,15 @@ export const UserProvider = ({ children }: Props) => {
   };
 
   const isLoggedIn = () => {
-    return !!user;
+    return !!user && !!token;
   };
 
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    setAuthToken(null);
     setUser(null);
-    setToken("");
+    setToken(null);
     navigate("/");
   };
 
