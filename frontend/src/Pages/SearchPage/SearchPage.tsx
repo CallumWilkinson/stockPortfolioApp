@@ -1,17 +1,25 @@
-import { SyntheticEvent, ChangeEvent, useState } from "react";
+import { SyntheticEvent, ChangeEvent, useState, useEffect } from "react";
 import Search from "../../Components/Search/Search";
 import { CompanySearch } from "../../company";
 import { searchCompanies } from "../../api";
 import ListPortfolio from "../../Components/Portfolio/ListPortfolio/ListPortfolio";
-import NavBar from "../../Components/Nav/NavBar";
 import Hero from "../../Components/Hero/Hero";
 import CardList from "../../Components/CardList/CardList";
+import { PortfolioGet } from "../../Models/Portfolio";
+import {
+  portfolioAddAPI,
+  portfolioDeleteAPI,
+  portfolioGetAPI,
+} from "../../Services/PortfolioService";
+import { toast } from "react-toastify";
 
 interface Props {}
 
 const SearchPage = (props: Props) => {
   const [search, setSearch] = useState<string>("");
-  const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
+  const [portfolioValues, setPortfolioValues] = useState<PortfolioGet[] | null>(
+    []
+  );
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
   const [serverError, setServerError] = useState<string>("");
 
@@ -19,6 +27,10 @@ const SearchPage = (props: Props) => {
     setSearch(e.target.value);
     console.log(e);
   };
+
+  useEffect(() => {
+    getPortfolio();
+  }, []);
 
   const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -31,23 +43,40 @@ const SearchPage = (props: Props) => {
     console.log(searchResult);
   };
 
+  const getPortfolio = () => {
+    portfolioGetAPI()
+      .then((res) => {
+        if (res?.data) {
+          setPortfolioValues(res?.data);
+        }
+      })
+      .catch((e) => {
+        toast.warning("Could not get portfolio values!");
+      });
+  };
+
   const onPortfolioCreate = (e: any) => {
     e.preventDefault();
-    const exists = portfolioValues.find((value) => value === e.target[0].value);
-    if (exists) {
-      return;
-    }
-    // spread operator becuase we want to create a new array to rerender react component, dont want to update like normal
-    const updatedPortfolio = [...portfolioValues, e.target[0].value];
-    setPortfolioValues(updatedPortfolio);
+    portfolioAddAPI(e.target[0].value)
+      .then((res) => {
+        if (res?.status === 204) {
+          toast.success("Stock added to portfolio");
+          getPortfolio();
+        }
+      })
+      .catch((e) => {
+        toast.warning("Could not add stock to portfolio");
+      });
   };
 
   const onPortfolioDelete = (e: any) => {
     e.preventDefault();
-    const removed = portfolioValues.filter((value) => {
-      return value !== e.target[0].value;
+    portfolioDeleteAPI(e.target[0].value).then((res) => {
+      if (res?.status === 200) {
+        toast.success("Stock deleted from portfolio");
+        getPortfolio();
+      }
     });
-    setPortfolioValues(removed);
   };
 
   return (
@@ -59,7 +88,7 @@ const SearchPage = (props: Props) => {
         handleSearchChange={handleSearchChange}
       ></Search>
       <ListPortfolio
-        portfolioValues={portfolioValues}
+        portfolioValues={portfolioValues!}
         onPortfolioDelete={onPortfolioDelete}
       ></ListPortfolio>
       {/* show server error if axios api call fails (conditional rendering) */}
