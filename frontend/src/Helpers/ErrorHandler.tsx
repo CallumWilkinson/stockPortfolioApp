@@ -28,6 +28,13 @@ export const handleError = (error: unknown) => {
     return;
   }
 
+  if (res.status === 429) {
+    toast.warning(
+      "Too many FMP API requests, this is a limitation of the free tier of the FMP API. You must wait untill tommorrow to continue using this app."
+    );
+    return;
+  }
+
   const errors = (res.data as any)?.errors;
 
   if (Array.isArray(errors)) {
