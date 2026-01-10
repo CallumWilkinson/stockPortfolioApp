@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 export const handleError = (error: unknown) => {
   if (!axios.isAxiosError(error)) {
+    toast.warning("An unexpected error has occured.");
     return;
   }
 
@@ -17,6 +18,13 @@ export const handleError = (error: unknown) => {
   if (res.status === 401) {
     toast.warning("Please login");
     window.location.assign("/login");
+    return;
+  }
+
+  if (res.status === 402) {
+    toast.warning(
+      "This data cannot be accessed from FMP API because this project uses the free tier, causing this stock to be limited."
+    );
     return;
   }
 
