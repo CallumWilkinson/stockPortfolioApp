@@ -2,6 +2,18 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Portfolio View
+
+![Portfolio Page](portfolio-demo.png)
+
+## API Endpoints
+
+![API Page](api-demo.png)
+
+## Login Page
+
+![Login Page](auth-demo.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
