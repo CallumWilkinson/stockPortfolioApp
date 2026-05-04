@@ -24,4 +24,4 @@ Tech stack:
 
 ## Login Page
 
-![Login Page](auth-demo.png)
+![Auth Page](auth-demo.png)
