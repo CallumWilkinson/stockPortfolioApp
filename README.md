@@ -16,7 +16,7 @@ Tech stack:
 - Tailwind CSS
 - SQL Server
 
-## Portfolio View
+## Company Financial Dashboard View
 
 ![Portfolio Page](portfolio-demo.png)
 
